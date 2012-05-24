@@ -1,0 +1,17 @@
+<script type="text/javascript">
+<!--
+    window.Django_CKEditor_Configs.push({
+        re: /{{ regex }}/,
+        config: {{ config|safe }}
+    });
+
+    CKEDITOR.config.content_embed_options = {{ content_embed_options|safe }};
+    CKEDITOR.config.content_embed_urls = {{ content_embed_urls|safe }};
+    CKEDITOR.config.image_embed_url = '{{ image_embed_url }}';
+
+    {% if filebrowser %}
+        CKEDITOR.config.filebrowserBrowseUrl = '/admin/filebrowser/browse/?pop=3';
+    {% endif %}
+    InitCKEditors();
+-->
+</script>
