@@ -1,5 +1,6 @@
 import os
 from setuptools import setup, find_packages
+import ckeditor
 
 def find_package_data(**packages):
     package_data = {}
