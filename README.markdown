@@ -43,20 +43,6 @@ Add a `CKEDITOR_CONFIGS` variable to your `settings.py` with at least a
             'linkShowTargetTab': False,
             'linkShowAdvancedTab': False,
         }
-        , 'basic': {
-            'toolbar': [
-                [      'Bold', 'Italic',
-                  '-', 'Link', 'Unlink',
-                ]
-            ]
-            , 'width': 600
-            , 'height': 250
-            , 'toolbarCanCollapse': False
-            , 'toolbarLocation': 'bottom'
-            , 'resize_enabled': False
-            , 'removePlugins': 'elementspath'
-            , 'forcePasteAsPlainText': True
-      }
     }
 
 Collect the static files:
@@ -105,18 +91,24 @@ like this:
         'default': {
             'toolbar': [
                 [      'Undo', 'Redo',
-                  '-', 'Bold', 'Italic', 'Underline',
-                  '-', 'Link', 'Unlink', 'Anchor',
                   '-', 'Format',
-                  '-', 'SpellChecker', 'Scayt',
-                  '-', 'Maximize',
+                  '-', 'Bold', 'Italic', 'Underline',
+                  '-', 'Link', 'Unlink', 
+                  '-', 'BulletedList', 'NumberedList',
                 ],
+                [      'SpellChecker', 'Scayt',
+                ],
+                [      'Image',
+                  '-', 'PasteText','PasteFromWord',
+                  '-', 'Source',
+                ]
             ],
-            'width': 840,
-            'height': 300,
+            'width': 655,
+            'height': 250,
             'toolbarCanCollapse': False,
-        },
-        
+            'linkShowTargetTab': False,
+            'linkShowAdvancedTab': False,
+        }
         , 'basic': {
             'toolbar': [
                 [      'Bold', 'Italic',
@@ -152,6 +144,34 @@ When setting up the `CKEditor` widget in your `Form` class you can pass a
 
 You cannot use the `HTMLField` shortcut if you want to specify a custom config
 -- you *must* create a form.
+
+### Additional Configuration Options
+
+If you want to limit the formats available in the Format drop-down, add the following to the config definition:
+
+    'format_tags': 'p;h3;h4', 
+
+### Embedded content
+
+Links in your HTMLFields will be able to point to either a model's list view or a model instance's absolute url. To provide a url for a model, define a class method called absolute_list_url:
+
+    @classmethod
+    def absolute_list_url(cls):
+        return reverse('career_posting')
+
+To provide a url for a model instance, define a method called get_absolute_url:
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('structure_page', None, {
+            'slug': self.slug
+        })
+
+By default, links will be able to point to any model from any registered app. You can specify a list to limit the options by providing a `CKEDITOR_EMBED_CONTENT` setting like this:
+
+  CKEDITOR_EMBED_CONTENT = ['structure.page', 'services.service', 'services.technology', 'portfolio.portfolioitem']
+
+This will limit the list to four items and hide models that don't have absolute urls like 'auth.group', etc.
 
 ### Media URL
 
