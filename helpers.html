@@ -1,0 +1,54 @@
+<!DOCTYPE html><html lang="en"><head><title>helpers</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="helpers"><meta name="groc-project-path" content="ckeditor/helpers.py"><meta name="groc-github-url" content="https://github.com/concentricsky/django-sky-ckeditor"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/concentricsky/django-sky-ckeditor/blob/master/ckeditor/helpers.py">ckeditor/helpers.py</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="kn">import</span> <span class="nn">jingo</span>
+<span class="kn">import</span> <span class="nn">jinja2</span>
+<span class="kn">from</span> <span class="nn">django.contrib.contenttypes.models</span> <span class="kn">import</span> <span class="n">ContentType</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">ImageUploadClass</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">skycms.structure.models</span> <span class="kn">import</span> <span class="n">ImageUpload</span>
+    <span class="n">ImageUploadClass</span> <span class="o">=</span> <span class="n">ImageUpload</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+
+<span class="nd">@jingo.register.function</span>
+<span class="k">def</span> <span class="nf">object_url</span><span class="p">(</span><span class="n">content_type_id</span><span class="p">,</span> <span class="nb">id</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">content_type</span> <span class="o">=</span> <span class="n">ContentType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">content_type_id</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">content_type</span><span class="o">.</span><span class="n">model_class</span><span class="p">()</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">content</span><span class="o">.</span><span class="n">get_absolute_url</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+
+
+<span class="n">_object_url_regex</span> <span class="o">=</span> <span class="s">&#39;\[\[\s*object_url\(\s*(\d*)\s*,\s*(\d*)\s*\)\s*\]\]&#39;</span>
+
+<span class="k">def</span> <span class="nf">_replace_urls</span><span class="p">(</span><span class="n">match</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">content_type</span> <span class="o">=</span> <span class="n">ContentType</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">content_type</span><span class="o">.</span><span class="n">model_class</span><span class="p">()</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
+            <span class="n">new_substr</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">get_absolute_url</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">content_type</span><span class="p">:</span>
+            <span class="n">new_substr</span> <span class="o">=</span> <span class="n">content_type</span><span class="o">.</span><span class="n">absolute_list_url</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">new_substr</span> <span class="o">=</span> <span class="s">&#39;/&#39;</span>
+    <span class="k">return</span> <span class="n">new_substr</span>
+
+
+<span class="n">_image_preview_url_regex</span> <span class="o">=</span> <span class="s">&#39;/imageuploadpreview/(\d+)&#39;</span>
+
+<span class="k">def</span> <span class="nf">_replace_image_preview_urls</span><span class="p">(</span><span class="n">match</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">new_substr</span> <span class="o">=</span> <span class="n">ImageUploadClass</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">url</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">new_substr</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">new_substr</span>
+
+
+<span class="nd">@jingo.register.filter</span>
+<span class="k">def</span> <span class="nf">safe_ckeditor</span><span class="p">(</span><span class="n">text</span><span class="p">):</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>replace object_url tags</p></div></div><div class="code"><div class="wrapper">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">_object_url_regex</span><span class="p">,</span> <span class="n">_replace_urls</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span></div></div></div><div class="segment"><div class="comments"><div class="wrapper"><p>replace image preview urls</p></div></div><div class="code"><div class="wrapper">    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">_image_preview_url_regex</span><span class="p">,</span> <span class="n">_replace_image_preview_urls</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Markup</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div></div></div></div></body></html>
