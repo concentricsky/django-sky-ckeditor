@@ -1441,9 +1441,6 @@ html.cke_skin_kama_container {
     border: none !important;
     padding: 0 !important;
 }
-.popup .cke_skin_kama {
-    width: 550px !important;
-}
 .cke_wrapper, .cke_skin_karma {
     border: 1px solid #7b7b7b !important;
     border-bottom: 1px solid #555657 !important;
@@ -1463,8 +1460,8 @@ html.cke_skin_kama_container {
 #content-main .module table.cke_editor {
     border: none;
 }
-#content-main .module table.cke_editor tr:nth-child(odd) {
-    background: transparent;
+#content-main .module table.cke_editor tr {
+    background: transparent !important;
     border: none;
     padding: 0;
 }
@@ -1477,6 +1474,7 @@ html.cke_skin_kama_container {
 .cke_focus {
     outline: none !important;
 }
+
 .cke_dialog_body {
     border: 1px solid #7b7b7b !important;
     border-bottom: 1px solid #555657 !important;
@@ -1512,8 +1510,7 @@ html.cke_skin_kama_container {
     border: none !important;
 }
 .cke_dialog_ui_select .cke_dialog_ui_labeled_label,
-.cke_dialog_ui_text .cke_dialog_ui_labeled_label ,
-.cke_dialog_ui_textarea .cke_dialog_ui_labeled_label {
+.cke_dialog_ui_text .cke_dialog_ui_labeled_label {
     color: #116bb9;
     font-size: 12px;
     margin-bottom: 10px !important;
@@ -1531,7 +1528,7 @@ html.cke_skin_kama_container {
     line-height: 26px;
     border: 1px solid #6d6d6d;
     border-radius: 15px;
-    padding: 0 5px;
+    padding: 0;
     font-size: 12px;
     font-weight: normal;
     background: #ababab;
@@ -1558,12 +1555,13 @@ html.cke_skin_kama_container {
 .cke_skin_kama .cke_browser_webkit a.cke_dialog_ui_button_cancel {
     display: block;
     float: right;
+    width: auto;
     margin: -10px 0 0 0 !important;
     height: 28px;
     line-height: 26px;
     border: 1px solid #6d6d6d;
     border-radius: 15px;
-    padding: 0 5px;
+    padding: 0;
     font-size: 12px;
     font-weight: normal;
     background: #ababab;
@@ -1589,12 +1587,13 @@ html.cke_skin_kama_container {
 }
 .cke_skin_kama .cke_browser_webkit a.cke_dialog_ui_button_ok {
     background: none;
+    width: auto;
     height: 28px;
     line-height: 28px;
     margin: -10px 0 0 0 !important;
     border: 1px solid #185488;
     border-radius: 15px;
-    padding: 8px 13px;
+    padding: 0;
     color: white;
     text-shadow: -1px -1px #185488;
     text-transform: uppercase;
