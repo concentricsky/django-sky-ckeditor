@@ -7,7 +7,6 @@
  (function($) {
     var GenericAdmin = {
         url_array: null,
-        obj_url: CKEDITOR.config.obj_lookup_url,
         admin_media_url: window.__admin_media_prefix__,
         prepareSelect: function(elem) {
             return $(elem).parents('div.cke_dialog_page_contents').find('select.content_type').first();
@@ -76,7 +75,7 @@
                 // bail if no input
                 $('#lookup_text_' + that.object_input.id).text('').text('loading...');
                 $.ajax({
-                    url: that.obj_url,
+                    url: CKEDITOR.config.obj_lookup_url,
                     dataType: 'json',
                     data: {
                         object_id: that.object_input.value,
@@ -151,7 +150,6 @@
 
     var ImageEmbedAdmin = {
         url_array: null,
-        obj_url: CKEDITOR.config.obj_lookup_url,
         admin_media_url: window.__admin_media_prefix__,
         showLookupLink: function() {
             var that = this;
