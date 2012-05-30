@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from django.contrib.contenttypes.models import ContentType
 from django.conf.urls.defaults import patterns, url
+from django.core.urlresolvers import reverse
 
 
 CKEDITOR_CONFIGS = dict((k, json.dumps(v)) for k, v in settings.CKEDITOR_CONFIGS.items())
@@ -54,6 +55,7 @@ class CKEditor(forms.Textarea):
             'content_embed_options': content_embed_options,
             'content_embed_urls': json.dumps(content_embed_urls),
             'image_embed_url': image_embed_url,
+            'obj_lookup_url': reverse('admin_genericadmin_obj_lookup'),
 
             # This "regex" should match the ID attribute of this field.
             # The reason we use a regex is so we can handle inlines, which will have

@@ -8,6 +8,7 @@
     CKEDITOR.config.content_embed_options = {{ content_embed_options|safe }};
     CKEDITOR.config.content_embed_urls = {{ content_embed_urls|safe }};
     CKEDITOR.config.image_embed_url = '{{ image_embed_url }}';
+    CKEDITOR.config.obj_lookup_url = '{{ obj_lookup_url }}';
 
     {% if filebrowser %}
         CKEDITOR.config.filebrowserBrowseUrl = '/admin/filebrowser/browse/?pop=3';
