@@ -181,7 +181,7 @@ CKEDITOR.dialog.add( 'link', function( editor )
 				retval.url.url = urlMatch[2];
 			}
 			else
-				retval.type = 'content';
+				retval.type = 'url';
 		}
 
 		// Load target and popup settings.
@@ -395,11 +395,11 @@ CKEDITOR.dialog.add( 'link', function( editor )
 						id : 'linkType',
 						type : 'select',
 						label : linkLang.type,
-						'default' : 'content',
+						'default' : 'url',
 						items :
 						[
-							[ 'Content', 'content' ],
 							[ linkLang.toUrl, 'url' ],
+							[ 'Content', 'content' ],
 							[ linkLang.toAnchor, 'anchor' ],
 							[ linkLang.toEmail, 'email' ]
 						],
@@ -1470,6 +1470,9 @@ CKEDITOR.dialog.add( 'link', function( editor )
 		},
 		onLoad : function()
 		{
+			if ( editor.config.linkHideLinkType ) {
+				this.getContentElement( 'info', 'linkType' ).getInputElement().getParent().getParent().hide()
+			}
 			if ( !editor.config.linkShowAdvancedTab )
 				this.hidePage( 'advanced' );		//Hide Advanded tab.
 
