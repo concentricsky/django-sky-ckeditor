@@ -1247,6 +1247,18 @@ CKEDITOR.dialog.add( 'link', function( editor )
 				element = null;
 
 			this.setupContent( parseLink.apply( this, [ editor, element ] ) );
+
+			if( editor.config.linkSimpleURL ) {
+				if( linkType = this.getContentElement('info', 'linkType') ) {
+					linkType.setValue('url');
+					linkType.disable();
+					linkType.getElement().hide();
+				}
+				if ( protocol = this.getContentElement('info', 'protocol') ) {
+					protocol.setValue('http://');
+					protocol.disable();
+				}
+			}
 		},
 		onOk : function()
 		{
