@@ -316,7 +316,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
                                     C.preview.setStyle('display', 'none');
                                 }
                             },
-                            onShow : function( data )
+                            onLoad : function( data )
                             {
                                 activate_image_select(this);
                             },
