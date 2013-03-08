@@ -14,3 +14,11 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
     background: #f6f6f6;
     border: 0;
 }
+
+.cke_wysiwyg_frame {
+    background: #f6f6f6;
+    -webkit-box-shadow: 0 2px 0 #e6e6e6 inset;
+    -moz-box-shadow: 0 2px 0 #e6e6e6 inset;
+    box-shadow: 0 2px 0 #e6e6e6 inset;
+    border: 1px solid #cdcdcd;
+}
