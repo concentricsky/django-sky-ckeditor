@@ -11,7 +11,7 @@ from django.contrib.admin import widgets as admin_widgets
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from django.contrib.contenttypes.models import ContentType
-from django.conf.urls.defaults import patterns, url
+from django.conf.urls import patterns, url
 from django.core.urlresolvers import reverse, NoReverseMatch
 
 
