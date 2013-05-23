@@ -43,7 +43,7 @@ class CKEditor(forms.Textarea):
             model_label = current_contenttype.model_class()._meta.verbose_name
             contenttype_id = current_contenttype.id
             model_url = '../../../%s/%s/?t=id' % (app_label, model_name)
-            content_embed_options += [[model_label, str(contenttype_id)]]
+            content_embed_options += [[str(model_label), str(contenttype_id)]]
             content_embed_urls[str(contenttype_id)] = model_url
 
         image_embed_url = '../../../%s/%s/?t=id' % ('structure', 'imageupload')
