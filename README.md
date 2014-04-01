@@ -1,13 +1,14 @@
-django-ckeditor
+![Concentric Sky](https://concentricsky.com/media/uploads/images/csky_logo.jpg)
+
+
+Django CKEditor
 ===============
 
-`django-ckeditor` makes it easy to use [CKEditor][] with your Django 1.3+ text
-fields.
+This library was forked from https://github.com/dwaiter/django-ckeditor. `django-ckeditor` makes it easy to use [CKEditor][] with your Django 1.3+ text fields.
 
 [CKEditor]: http://ckeditor.com/
 
-Setup
------
+## Installation
 
 Install the package with [pip][] and [git][]:
 
@@ -49,8 +50,9 @@ Collect the static files:
 
     python manage.py collectstatic
 
-Usage
------
+
+## Usage
+
 
 To use CKEditor for a particular field in a form, set its widget to an
 instance of `ckeditor.widgets.CKEditor` like this:
@@ -182,3 +184,14 @@ media at by adding `CKEDITOR_MEDIA_URL` to your `settings.py` file like this:
 
 The default value is `MEDIA_URL/ckeditor` which is why the setup instructions
 tell you to symlink it into your `media/` directory.
+
+
+## License
+
+Details can be found in the LICENSE.md file.
+
+
+## About Concentric Sky
+
+_For nearly a decade, Concentric Sky has been building technology solutions that impact people everywhere. We work in the mobile, enterprise and web application spaces. Our team, based in Eugene Oregon, loves to solve complex problems. Concentric Sky believes in contributing back to our community and one of the ways we do that is by open sourcing our code on GitHub. Contact Concentric Sky at hello@concentricsky.com._
+
