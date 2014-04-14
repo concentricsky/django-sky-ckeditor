@@ -20,7 +20,7 @@ This library was forked from https://github.com/dwaiter/django-ckeditor. `django
 
 Install the package with [pip][] and [git][]:
 
-    pip install -e git://github.com/concentricsky/django-sky-ckeditor#egg=django-sky-ckeditor
+    pip install git://github.com/concentricsky/django-sky-ckeditor
 
 [pip]: http://pip.openplans.org/
 [git]: http://git-scm.com/
