@@ -1,8 +1,7 @@
 ![Concentric Sky](https://concentricsky.com/media/uploads/images/csky_logo.jpg)
 
 
-Django CKEditor
-===============
+# Django CKEditor
 
 This library was forked from https://github.com/dwaiter/django-ckeditor. `django-ckeditor` makes it easy to use [CKEditor][] with your Django 1.3+ text fields.
 
@@ -161,7 +160,7 @@ If you want to limit the formats available in the Format drop-down, add the foll
 
     'format_tags': 'p;h3;h4', 
 
-### Embedded content
+### Embedded Content
 
 Links in your HTMLFields will be able to point to either a model's list view or a model instance's absolute url. To provide a url for a model, define a class method called absolute_list_url:
 
