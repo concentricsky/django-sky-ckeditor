@@ -8,6 +8,14 @@ This library was forked from https://github.com/dwaiter/django-ckeditor. `django
 
 [CKEditor]: http://ckeditor.com/
 
+
+### Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+- [License](#license)
+- [About Concentric Sky](#about-concentric-sky)
+
+
 ## Installation
 
 Install the package with [pip][] and [git][]:
