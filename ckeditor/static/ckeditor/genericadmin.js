@@ -52,9 +52,9 @@
             name = id_to_windowname(name);
 
             if (link.href.search(/\?/) >= 0) {
-                href = link.href + '&pop=1';
+                href = link.href + '&_popup=1';
             } else {
-                href = link.href + '?pop=1';
+                href = link.href + '?_popup=1';
             }
             win = window.open(href, name, 'height=500,width=800,resizable=yes,scrollbars=yes');
 
@@ -181,11 +181,11 @@
             name = id_to_windowname(name);
 
             if (link.href.search(/\?/) >= 0) {
-                href = link.href + '&pop=1';
+                href = link.href + '&_popup=1';
             } else {
-                href = link.href + '?pop=1';
+                href = link.href + '?_popup=1';
             }
-            win = window.open(href, name, 'height=500,width=800,resizable=yes,scrollbars=yes');
+            win = window.open(href, name, 'height=600,width=1000,resizable=yes,scrollbars=yes');
 
             // wait for popup to be closed and load object data
             this.pollInputChange(win);
